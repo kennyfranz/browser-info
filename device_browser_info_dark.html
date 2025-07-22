@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Device & Browser Info</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f0f2f5;
+      color: #000;
+    }
+
+    .info-box {
+      background-color: #fff;
+      padding: 1.5rem 2rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      max-width: 750px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .item {
+      margin-bottom: 1.2rem;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .value-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.3rem;
+    }
+
+    .value {
+      word-break: break-all;
+      flex-grow: 1;
+    }
+
+    .copy-btn {
+      margin-left: 10px;
+      padding: 4px 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .copy-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #1e1e1e;
+        color: #f0f0f0;
+      }
+      .info-box {
+        background-color: #2c2c2c;
+        border: 1px solid #444;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      }
+      .copy-btn {
+        background-color: #3399ff;
+        color: black;
+      }
+      .copy-btn:hover {
+        background-color: #66b2ff;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="info-box">
+    <h2>Device & Browser Info</h2>
+
+    <div class="item">
+      <div class="label">User Agent:</div>
+      <div class="value-box">
+        <div class="value" id="userAgent"></div>
+        <button class="copy-btn" onclick="copyText('userAgent')">Copy</button>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="label">Device Pixel Ratio:</div>
+      <div class="value-box">
+        <div class="value" id="dpr"></div>
+        <button class="copy-btn" onclick="copyText('dpr')">Copy</button>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="label">Screen Resolution:</div>
+      <div class="value-box">
+        <div class="value" id="screenRes"></div>
+        <button class="copy-btn" onclick="copyText('screenRes')">Copy</button>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="label">Viewport Size:</div>
+      <div class="value-box">
+        <div class="value" id="viewport"></div>
+        <button class="copy-btn" onclick="copyText('viewport')">Copy</button>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="label">Platform:</div>
+      <div class="value-box">
+        <div class="value" id="platform"></div>
+        <button class="copy-btn" onclick="copyText('platform')">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Populate fields
+    document.getElementById("userAgent").textContent = navigator.userAgent;
+    document.getElementById("dpr").textContent = window.devicePixelRatio;
+    document.getElementById("screenRes").textContent = `${screen.width} x ${screen.height}`;
+    document.getElementById("viewport").textContent = `${window.innerWidth} x ${window.innerHeight}`;
+    document.getElementById("platform").textContent = navigator.platform || 'N/A';
+
+    // Copy function
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`Copied: ${text}`);
+      }).catch(err => {
+        alert('Failed to copy!');
+        console.error(err);
+      });
+    }
+  </script>
+
+</body>
+</html>
